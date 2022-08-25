@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=human
+comment1.params=name\ age\ weight\ dead\ criminal\ hasjob
+comment1.target=human(java.lang.String,\ int,\ int,\ boolean,\ boolean,\ boolean)
+comment2.params=s
+comment2.target=void\ say(java.lang.Object)
+comment3.params=
+comment3.target=void\ die()
+numComments=4
