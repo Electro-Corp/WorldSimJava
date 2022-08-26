@@ -1,5 +1,15 @@
 #BlueJ class context
 comment0.target=goverment
-comment1.params=type\ wealth\ leader
-comment1.target=goverment(int,\ int,\ human)
-numComments=2
+comment1.params=e
+comment1.target=void\ printf(java.lang.Object)
+comment2.params=type\ wealth\ leader\ name
+comment2.target=goverment(int,\ int,\ human,\ java.lang.String)
+comment3.params=
+comment3.target=void\ update()
+comment4.params=person
+comment4.target=void\ addPerson(human)
+comment5.params=enemy
+comment5.target=void\ toWar(goverment)
+comment6.params=
+comment6.target=void\ attack()
+numComments=7
