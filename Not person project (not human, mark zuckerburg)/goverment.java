@@ -110,8 +110,9 @@ public class goverment {
         if(agre >= other.agression){
             toWar(other);
         }else{
-          
-          printf("Diplomacy went well.");
+          if(other.name != name){
+            printf("Diplomacy went well.");
+          }
         }
     }
 }
