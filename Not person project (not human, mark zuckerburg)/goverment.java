@@ -10,20 +10,22 @@ public class goverment {
      * 2 = Democracy
      * 3 = Dictators
      */
-    int type,wealth,health;
+    int type,wealth,health,agression;
     goverment enemy;
     List<human> peoples =  new ArrayList<human>();
     human leader;
     String name;
     String types[] = {"Anarchy","Monarchy","Democracy","Dictatorship"};
+    bird spyone = new bird();
     public void printf(Object e){
         System.out.println(e);
     }
-    goverment(int type, int wealth, human leader, String name){
+    goverment(int type, int wealth, human leader, String name, int agression){
         this.type = type;
         this.wealth = wealth;
         this.leader = leader;
         this.name = name;
+        this.agression = agression;
         health = 100;
         System.out.println("A new goverment has been formed with type: "+types[type]+", and with leader: "+leader.name);
     }
@@ -36,6 +38,14 @@ public class goverment {
                 count++;
             }
         }
+        Random rand = new Random();
+        int spy = rand.nextInt((peoples.size() - 0) + 1) + 0;
+        try{
+        printf("'Bird' has spyed and got : "+spyone.spy(peoples.get(spy)));
+        }catch(Exception e){
+            printf("Failed in spy mission. Maybe next time?");
+        }
+        
         System.out.println("---------------------------------------------");
     }
     public void addPerson(human person){
@@ -54,16 +64,20 @@ public class goverment {
         if(health > 0){
             int number = (int)(Math.random()*100+1);
             number -= enemy.wealth;
-            printf(name + " has attacked " + enemy.name + " with a "+number+"% chance of hitting");
-            if(number < 50){
-                printf("FAILED!");
+            if(enemy.health > 0){
+                printf(name + " has attacked " + enemy.name + " with a "+number);
+                if(number < 50){
+                    printf("Attacked failed!");
+                }else{
+                    printf("Attack successe!");
+                    enemy.health -= number;
+                    printf(enemy.name + " now has "+enemy.health+" health left.");
+                }
             }else{
-                printf("HIT! XD LAMO!");
-                enemy.health -= number;
-                printf(enemy.name + " now has "+enemy.health+" health left.");
+                printf(enemy.name + " has fallen, yet "+name+" still tried to attack!!");
             }
         }else{
-            
+            printf(name+" has fallen!");
         }
     }
 }

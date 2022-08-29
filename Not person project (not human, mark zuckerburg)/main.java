@@ -5,7 +5,7 @@ public class main{
         human trevor = new human("Trevor",36,125,false,false,true);
         trevor.say("Imma start a dictatorship lamo");
         // Trevorland
-        goverment trevorland = new goverment(3,0,trevor,"Trevorland");
+        goverment trevorland = new goverment(3,20,trevor,"Trevorland");
         testhuman.say("I should join trevorland?");
         trevorland.addPerson(testhuman);
         testhuman.say("*insert bad joke here*");
@@ -19,22 +19,11 @@ public class main{
         human chinmay = new human("Chinmay Tiwari",245,142,false,false,true);
         goverment creator = new goverment(3,0,chinmay,"creator");
         
-        //trevor goes to war
-        trevor.say("I will rage war against the creator!");
-        trevorland.toWar(creator);
-        logan.say("Attacking on frontlines");
-        for(int i = 0; i < 25; i++){
-            trevorland.attack();
-            creator.attack();
-            if(trevorland.health < 0){
-                trevorland.printf("Trevorland has ended!");
-                break;
-            }
-            if(creator.health < 0){
-                trevorland.printf("Creator has ended!");
-                break;
-            }
+        for (int i = 0; i < 200; i++){
+            trevorland.update();
+            creator.update();
         }
+        
     }
     
 }
