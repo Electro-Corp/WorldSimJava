@@ -2,6 +2,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 import java.lang.Math;
+import java.util.Scanner;
 public class goverment {
     /*
      * TYPES: 
@@ -11,9 +12,10 @@ public class goverment {
      * 3 = Dictators
      */
     int type,wealth,health,agression;
-    goverment enemy;
+    List <goverment> enemys =  new ArrayList<goverment>();
     boolean atwar = false;
     List<human> peoples =  new ArrayList<human>();
+    Scanner scan = new Scanner(System.in);
     human leader;
     String name;
     String types[] = {"Anarchy","Monarchy","Democracy","Dictatorship"};
@@ -30,24 +32,24 @@ public class goverment {
         health = 100;
         System.out.println("A new goverment has been formed with type: "+types[type]+", and with leader: "+leader.name);
     }
-    public void attack(){
+    public void attack(goverment enemyie){
         if(health > 0 && atwar == true){
             int number = (int)(Math.random()*100+1);
-            number -= enemy.wealth;
-            if(enemy.health > 0){
-                printf(name + " has attacked " + enemy.name + " with a "+number);
+            number -= enemyie.wealth;
+            if(enemyie.health > 0){
+                printf(name + " has attacked " + enemyie.name + " with a "+number);
                 if(number < 50){
                     printf("Attacked failed!");
                 }else{
                     printf("Attack success!");
-                    enemy.health -= number;
-                    printf(enemy.name + " now has "+enemy.health+" health left.");
-                  if(enemy.health < 0){
-                    printf(enemy.name + " has fallen!");
+                    enemyie.health -= number;
+                    printf(enemyie.name + " now has "+enemyie.health+" health left.");
+                  if(enemyie.health < 0){
+                    printf(enemyie.name + " has fallen!");
                   }
                 }
             }else{
-                printf(enemy.name + " has fallen, yet "+name+" still tried to attack!!");
+                printf(enemyie.name + " has fallen, yet "+name+" still tried to attack!!");
             }
         }else{
             printf(name+" has fallen!");
@@ -73,11 +75,14 @@ public class goverment {
         }
         diplomacy(goverments);
         if(atwar){
-            if(enemy.health > 0 && health > 0){
-              attack();
+            for(int i = 0; i < enemys.size(); i++)            {
+              if(enemys.get(i).health > 0 && health > 0){
+                attack(enemys.get(i));
+              }
             }
         }
         System.out.println("---------------------------------------------");
+        String bruh = scan.nextLine();
       }
     }
     public void addPerson(human person){
@@ -85,13 +90,13 @@ public class goverment {
         System.out.println(name + ", has a new member, "+person.name);
     }
     public void toWar(goverment enemy){
-      if(enemy.enemy != this){
+      if(!enemy.enemys.contains(this)){
             if(enemy.health > 0){
-        this.enemy = enemy;
-        System.out.println(name + " has declared war on: "+enemy.name);
+        enemys.add(enemy);
+        System.out.println(name + " has declared war on: "+enemys.get(enemys.size()));
         atwar = true;
         
-            enemy.toWar(this);
+            enemys.get(enemys.size()).toWar(this);
             
         }
       }
@@ -111,7 +116,9 @@ public class goverment {
             toWar(other);
         }else{
           if(other.name != name){
-            printf("Diplomacy went well.");
+            if(!atwar){
+              printf("Diplomacy went well.");
+            }
           }
         }
     }
